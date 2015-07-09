@@ -47,10 +47,10 @@ namespace WebMRecorder
         public void SetupRecordingWindow(Rect selectedArea)
         {
             _selectedArea = selectedArea;
-            RecordingAreaIndicator.SetValue(LeftProperty, selectedArea.X);
-            RecordingAreaIndicator.SetValue(TopProperty, selectedArea.Y);
-            RecordingAreaIndicator.Width = selectedArea.Width;
-            RecordingAreaIndicator.Height = selectedArea.Height;
+            RecordingAreaIndicator.SetValue(LeftProperty, selectedArea.X-2);
+            RecordingAreaIndicator.SetValue(TopProperty, selectedArea.Y-2);
+            RecordingAreaIndicator.Width = selectedArea.Width+4;
+            RecordingAreaIndicator.Height = selectedArea.Height+4;
 
             StartButton.Click += StartButtonOnClick;
             StopButton.Click += StopButtonOnClick;
@@ -59,8 +59,8 @@ namespace WebMRecorder
 
             ControlGrid.RenderTransform = _controlGridRenderTransform;
 
-            _controlGridRenderTransform.X = selectedArea.X + selectedArea.Width;
-            _controlGridRenderTransform.Y = selectedArea.Y + selectedArea.Height - ControlGrid.ActualHeight;
+            _controlGridRenderTransform.X = selectedArea.X-2 + selectedArea.Width+4;
+            _controlGridRenderTransform.Y = selectedArea.Y-2 + selectedArea.Height+2 - ControlGrid.ActualHeight;
 
             Fps = 25;
 

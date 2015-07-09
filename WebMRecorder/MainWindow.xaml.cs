@@ -34,10 +34,6 @@ namespace WebMRecorder
         {
             _screenSelectionWindow.Closed -= ScreenSelectionWindowOnClosed;
             _selectedArea = _screenSelectionWindow.GetSelectionRectangle();
-            _selectedArea.X += 2;
-            _selectedArea.Y += 2;
-            _selectedArea.Width -= 2;
-            _selectedArea.Height -= 2;
 
             var recordWindow = new RecordWindow();
             int fps;

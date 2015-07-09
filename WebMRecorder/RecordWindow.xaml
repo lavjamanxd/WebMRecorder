@@ -14,7 +14,7 @@
         <Rectangle x:Name="RecordingAreaIndicator"
                    Fill="Transparent"
                    Stroke="Red"
-                   StrokeThickness="2" />
+                   StrokeThickness="1" />
 
         <Grid x:Name="ControlGrid">
             <StackPanel Orientation="Vertical">
