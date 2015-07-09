@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Frapper;
+using WebMRecorder.Properties;
 using Size = System.Drawing.Size;
 
 namespace WebMRecorder
@@ -29,6 +30,12 @@ namespace WebMRecorder
         public RecordWindow()
         {
             InitializeComponent();
+
+            Height = SystemParameters.PrimaryScreenHeight;
+            Width = SystemParameters.PrimaryScreenWidth;
+            Left = 0;
+            Top = 0;
+
             Deactivated += OnDeactivated;
         }
 
@@ -84,7 +91,9 @@ namespace WebMRecorder
 
         private void ConvertAsync()
         {
-            var ffmpeg = new FFMPEG();
+            var path = Directory.GetCurrentDirectory() + "\\ffmpeg.exe";
+            var ffmpeg = new FFMPEG(path);
+
             var retval = ffmpeg.RunCommand(
                 $"-framerate {Fps} -i img%03d.png -vf fps={Fps} -c:v libvpx -b:v 1M output.webm");
 

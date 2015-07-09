@@ -12,7 +12,9 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="FPS: " />
-                <TextBox x:Name="FpsTextBox" Width="250" />
+                <TextBox x:Name="FpsTextBox"
+                         Width="250"
+                         Text="25" />
             </StackPanel>
 
             <Button x:Name="StartSelectArea" Content="StartSelectArea" />

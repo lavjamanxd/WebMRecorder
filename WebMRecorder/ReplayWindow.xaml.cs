@@ -39,7 +39,7 @@ namespace WebMRecorder
             StopButton.Click+=StopButtonOnClick;
             converter= new BitmapToSourceConverter();
             ProgressSlider.Minimum = 0;
-            ProgressSlider.Maximum = _bitmaps.Count;
+            ProgressSlider.Maximum = _bitmaps.Count-1;
             ProgressSlider.TickFrequency = 1;
             ProgressSlider.Value = 0;
             ProgressSlider.ValueChanged+=ProgressSliderOnValueChanged;
