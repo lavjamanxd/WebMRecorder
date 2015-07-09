@@ -16,11 +16,14 @@
                    Stroke="Red"
                    StrokeThickness="2" />
 
-        <Grid x:Name="ControlGrid" Height="100">
+        <Grid x:Name="ControlGrid">
             <StackPanel Orientation="Vertical">
                 <Button x:Name="StartButton" Content="Start" />
                 <Button x:Name="StopButton"
                         Content="Stop"
+                        IsEnabled="False" />
+                <Button x:Name="ReplayButton"
+                        Content="Replay"
                         IsEnabled="False" />
                 <StackPanel Background="White" Orientation="Horizontal">
                     <TextBlock Text="CapturedFrames:" />

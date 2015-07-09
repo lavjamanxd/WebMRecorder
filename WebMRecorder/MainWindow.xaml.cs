@@ -6,9 +6,6 @@ using System.Windows.Threading;
 
 namespace WebMRecorder
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public int Fps { get; set; }
@@ -38,7 +35,10 @@ namespace WebMRecorder
             _screenSelectionWindow.Closed -= ScreenSelectionWindowOnClosed;
             _selectedArea = _screenSelectionWindow.GetSelectionRectangle();
             var recordWindow = new RecordWindow();
+            int fps;
+            int.TryParse(FpsTextBox.Text, out fps);
             recordWindow.SetupRecordingWindow(_selectedArea);
+            recordWindow.Fps = fps;
             recordWindow.Show();
         }
 

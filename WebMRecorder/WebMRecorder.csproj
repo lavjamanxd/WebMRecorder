@@ -64,6 +64,9 @@
     <Compile Include="RecordWindow.xaml.cs">
       <DependentUpon>RecordWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ReplayWindow.xaml.cs">
+      <DependentUpon>ReplayWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="resultView.xaml.cs">
       <DependentUpon>resultView.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RecordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReplayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

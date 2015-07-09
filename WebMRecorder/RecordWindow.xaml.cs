@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using Frapper;
 using Size = System.Drawing.Size;
@@ -48,6 +47,7 @@ namespace WebMRecorder
 
             StartButton.Click += StartButtonOnClick;
             StopButton.Click += StopButtonOnClick;
+            ReplayButton.Click+=ReplayButtonOnClick;
             _controlGridRenderTransform = new TranslateTransform();
 
             ControlGrid.RenderTransform = _controlGridRenderTransform;
@@ -66,6 +66,14 @@ namespace WebMRecorder
             CaptureBitmaps = new List<Bitmap>();
         }
 
+        private void ReplayButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            Hide();
+            var replayWindow = new ReplayWindow();
+            replayWindow.SetupPlayer(CaptureBitmaps, _selectedArea, Fps);
+            replayWindow.Show();
+        }
+
         private int _frames = 0;
         private void CaptureOnTick(object sender, EventArgs eventArgs)
         {
@@ -78,7 +86,7 @@ namespace WebMRecorder
         {
             var ffmpeg = new FFMPEG();
             var retval = ffmpeg.RunCommand(
-                $"-framerate 25 -i img%03d.png -vf fps=25 -c:v libvpx -b:v 1M output.webm");
+                $"-framerate {Fps} -i img%03d.png -vf fps={Fps} -c:v libvpx -b:v 1M output.webm");
 
             foreach (var file in Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "*.png"))
             {
@@ -99,6 +107,7 @@ namespace WebMRecorder
 
         private async void StopButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
         {
+            ReplayButton.IsEnabled = true;
             _timer.Stop();
 
             foreach (var bitmap in CaptureBitmaps)
@@ -108,7 +117,7 @@ namespace WebMRecorder
             }
 
             await Task.Run(new Action(ConvertAsync));
-
+            
             StartButton.IsEnabled = false;
             StopButton.IsEnabled = true;
         }
