@@ -89,18 +89,21 @@ namespace WebMRecorder
             CapturedFramesTextBlock.Text = _frames.ToString();
         }
 
-        private void ConvertAsync()
+        private void Convert()
         {
             var path = Directory.GetCurrentDirectory() + "\\ffmpeg.exe";
             var ffmpeg = new FFMPEG(path);
 
-            var retval = ffmpeg.RunCommand(
+            ffmpeg.RunCommand(
                 $"-framerate {Fps} -i img%03d.png -vf fps={Fps} -c:v libvpx -b:v 1M output.webm");
 
             foreach (var file in Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "*.png"))
             {
                 File.Delete(file);
             }
+            
+            Application.Current.Dispatcher.Invoke(() => ConvertingStackPanel.Visibility = Visibility.Collapsed,
+                DispatcherPriority.Normal);
         }
 
         private Bitmap CaptureImage(Rect rectangle)
@@ -116,7 +119,9 @@ namespace WebMRecorder
 
         private async void StopButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
         {
+            ConvertingStackPanel.Visibility = Visibility.Visible;
             ReplayButton.IsEnabled = true;
+
             _timer.Stop();
 
             foreach (var bitmap in CaptureBitmaps)
@@ -125,10 +130,11 @@ namespace WebMRecorder
                 bitmap.Save(filename);
             }
 
-            await Task.Run(new Action(ConvertAsync));
-            
-            StartButton.IsEnabled = false;
-            StopButton.IsEnabled = true;
+
+            await Task.Run(()=> Convert());
+
+            StartButton.IsEnabled = true;
+            StopButton.IsEnabled = false;
         }
 
         private void StartButtonOnClick(object sender, RoutedEventArgs routedEventArgs)

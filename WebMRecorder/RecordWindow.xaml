@@ -29,6 +29,14 @@
                     <TextBlock Text="CapturedFrames:" />
                     <TextBlock x:Name="CapturedFramesTextBlock" Text="0" />
                 </StackPanel>
+                <StackPanel x:Name="ConvertingStackPanel"
+                            Orientation="Vertical"
+                            Visibility="Collapsed">
+                    <ProgressBar Height="10" IsIndeterminate="True" />
+                    <TextBlock VerticalAlignment="Center"
+                               Background="White"
+                               Text="Converting..." />
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Canvas>
