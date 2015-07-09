@@ -1,0 +1,32 @@
+﻿<Window x:Class="WebMRecorder.RecordWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WebMRecorder"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="RecordWindow"
+        AllowsTransparency="True"
+        Background="{x:Null}"
+        Topmost="True"
+        WindowStyle="None"
+        mc:Ignorable="d">
+    <Canvas x:Name="RecordCanvas" Background="Transparent">
+        <Rectangle x:Name="RecordingAreaIndicator"
+                   Fill="Transparent"
+                   Stroke="Red"
+                   StrokeThickness="2" />
+
+        <Grid x:Name="ControlGrid" Height="100">
+            <StackPanel Orientation="Vertical">
+                <Button x:Name="StartButton" Content="Start" />
+                <Button x:Name="StopButton"
+                        Content="Stop"
+                        IsEnabled="False" />
+                <StackPanel Background="White" Orientation="Horizontal">
+                    <TextBlock Text="CapturedFrames:" />
+                    <TextBlock x:Name="CapturedFramesTextBlock" Text="0" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Canvas>
+</Window>

@@ -1,0 +1,18 @@
+﻿<Window x:Class="WebMRecorder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WebMRecorder"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow"
+        Width="525"
+        Height="350"
+        mc:Ignorable="d">
+    <Grid>
+        <Button x:Name="StartSelectArea" Content="StartSelectArea" />
+        <ProgressBar x:Name="ProgressBar"
+                     IsEnabled="False"
+                     IsIndeterminate="True"
+                     Visibility="Collapsed" />
+    </Grid>
+</Window>
